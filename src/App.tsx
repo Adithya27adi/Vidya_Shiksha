@@ -18,6 +18,7 @@ import MyCoursesPage from "./pages/MyCoursesPage";
 import ProfilePage from "./pages/ProfilePage";
 import LearningPage from "./pages/LearningPage";
 import ReadingComprehensionPage from "./pages/ReadingComprehensionPage";
+import AssessmentPage from "./pages/AssessmentPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/learn/:batchId" element={<LearningPage />} />
             <Route path="/reading/:activityId" element={<ReadingComprehensionPage />} />
+            <Route path="/assessment/:activityId" element={<AssessmentPage />} />
             
             <Route path="*" element={<NotFound />} />
           </Routes>
