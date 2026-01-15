@@ -1,11 +1,70 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { CourseCard } from "@/components/courses/CourseCard";
 import { courses } from "@/data/mockData";
-import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, GraduationCap, PlayCircle, FileText } from "lucide-react";
+import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function LandingPage() {
   const featuredCourses = courses.slice(0, 6);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      title: "Excel in academics with",
+      highlight: "expert-led courses",
+      description: "Learn from top faculty with live mentorship and hands-on learning for Classes 5–12.",
+      cta: "Explore Programs",
+      ctaLink: "/courses",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop",
+      bgGradient: "from-primary/5 to-accent/5",
+      tags: ["Live Classes", "CBSE & ICSE"]
+    },
+    {
+      title: "Master Mathematics with",
+      highlight: "interactive lessons",
+      description: "From basic concepts to advanced problem-solving, build strong foundations with our expert math teachers.",
+      cta: "Start Learning",
+      ctaLink: "/courses",
+      image: "https://images.unsplash.com/photo-1596496050827-8299e0220de1?w=600&h=400&fit=crop",
+      bgGradient: "from-live/5 to-primary/5",
+      tags: ["Practice Tests", "Doubt Solving"]
+    },
+    {
+      title: "Science made simple with",
+      highlight: "visual learning",
+      description: "Understand complex science concepts through animations, experiments, and real-world examples.",
+      cta: "Explore Science",
+      ctaLink: "/courses",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop",
+      bgGradient: "from-accent/5 to-warning/5",
+      tags: ["Video Lessons", "Lab Experiments"]
+    },
+    {
+      title: "Board exam preparation",
+      highlight: "made effective",
+      description: "Comprehensive study material, mock tests, and personalized guidance for Class 10 & 12 board exams.",
+      cta: "Prepare Now",
+      ctaLink: "/courses",
+      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop",
+      bgGradient: "from-warning/5 to-live/5",
+      tags: ["Mock Tests", "Result Oriented"]
+    }
+  ];
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  }, [heroSlides.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  }, [heroSlides.length]);
+
+  // Auto-slide every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
 
   const testimonials = [
     {
@@ -33,116 +92,128 @@ export default function LandingPage() {
 
   return (
     <MainLayout>
-      {/* Hero Section - Great Learning Style */}
-      <section className="bg-secondary/30 overflow-hidden">
-        <div className="container py-12 md:py-16">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            {/* Left Content */}
-            <div className="max-w-xl">
-              <h1 className="text-foreground mb-4 text-4xl md:text-5xl font-bold leading-tight">
-                Excel in academics with
-                <span className="block text-primary">expert-led courses</span>
-              </h1>
-              
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Learn from top faculty with live mentorship and hands-on learning for Classes 5–12.
-              </p>
-              
-              <Link to="/courses" className="btn-primary px-8 py-3 text-base inline-flex">
-                Explore Programs
-              </Link>
+      {/* Hero Carousel Section */}
+      <section className="relative bg-secondary/30 overflow-hidden">
+        <div className="container py-8 md:py-12">
+          {/* Carousel Container */}
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <button 
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-background shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-5 w-5 text-foreground" />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-background shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-5 w-5 text-foreground" />
+            </button>
 
-              {/* Trust indicators */}
-              <div className="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-border/50">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary" />
+            {/* Slides */}
+            <div className="overflow-hidden rounded-3xl">
+              <div 
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {heroSlides.map((slide, index) => (
+                  <div 
+                    key={index}
+                    className="w-full flex-shrink-0"
+                  >
+                    <div className={`bg-gradient-to-br ${slide.bgGradient} rounded-3xl p-1`}>
+                      <div className="bg-card rounded-3xl overflow-hidden">
+                        <div className="grid md:grid-cols-2 gap-0">
+                          {/* Left Content */}
+                          <div className="p-8 md:p-12 flex flex-col justify-center">
+                            <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4">
+                              {slide.title}
+                              <span className="block text-primary">{slide.highlight}</span>
+                            </h2>
+                            <p className="text-muted-foreground mb-6 leading-relaxed">
+                              {slide.description}
+                            </p>
+                            <div className="flex flex-wrap gap-2 mb-6">
+                              {slide.tags.map((tag) => (
+                                <span key={tag} className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <Link 
+                              to={slide.ctaLink} 
+                              className="btn-primary px-8 py-3 text-base w-fit"
+                            >
+                              {slide.cta}
+                            </Link>
+                          </div>
+
+                          {/* Right Image */}
+                          <div className="relative hidden md:block">
+                            <img 
+                              src={slide.image}
+                              alt={slide.highlight}
+                              className="w-full h-full object-cover min-h-[400px]"
+                            />
+                            {/* Overlay gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-card/50 to-transparent" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-foreground">10,000+</p>
-                    <p className="text-xs text-muted-foreground">Students</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-live/10 flex items-center justify-center">
-                    <Video className="h-5 w-5 text-live" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-foreground">100+</p>
-                    <p className="text-xs text-muted-foreground">Live Courses</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center">
-                    <Award className="h-5 w-5 text-warning" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-foreground">50+</p>
-                    <p className="text-xs text-muted-foreground">Expert Teachers</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
-            {/* Right - Hero Cards */}
-            <div className="relative hidden lg:block">
-              {/* Main Student Card */}
-              <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-1">
-                <div className="bg-card rounded-3xl p-6 shadow-xl">
-                  <div className="flex gap-6">
-                    {/* Student Image */}
-                    <div className="relative flex-shrink-0">
-                      <img 
-                        src="https://images.unsplash.com/photo-1627556704302-624286467c65?w=280&h=350&fit=crop"
-                        alt="Student"
-                        className="w-44 h-56 object-cover rounded-2xl"
-                      />
-                      {/* Floating badge */}
-                      <div className="absolute -bottom-3 -right-3 bg-live text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5">
-                        <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                        Live Classes
-                      </div>
-                    </div>
-                    
-                    {/* Features List */}
-                    <div className="flex flex-col justify-center gap-3">
-                      {[
-                        { icon: GraduationCap, text: "CBSE & ICSE Aligned", color: "primary" },
-                        { icon: PlayCircle, text: "Interactive Sessions", color: "live" },
-                        { icon: FileText, text: "Practice Tests", color: "accent" },
-                        { icon: Award, text: "Certificates", color: "warning" },
-                      ].map(({ icon: Icon, text, color }) => (
-                        <div 
-                          key={text}
-                          className="flex items-center gap-2.5 px-4 py-2.5 bg-secondary/80 rounded-xl"
-                        >
-                          <Icon className={`h-4 w-4 ${
-                            color === 'primary' ? 'text-primary' :
-                            color === 'live' ? 'text-live' :
-                            color === 'accent' ? 'text-accent' :
-                            'text-warning'
-                          }`} />
-                          <span className="text-sm font-medium text-foreground">{text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Partner logos */}
-                  <div className="flex items-center gap-4 mt-6 pt-4 border-t border-border/50">
-                    <span className="text-xs text-muted-foreground">Aligned with:</span>
-                    <div className="flex items-center gap-3">
-                      <div className="px-3 py-1.5 bg-secondary rounded-lg text-xs font-semibold text-foreground">CBSE</div>
-                      <div className="px-3 py-1.5 bg-secondary rounded-lg text-xs font-semibold text-foreground">ICSE</div>
-                      <div className="px-3 py-1.5 bg-secondary rounded-lg text-xs font-semibold text-foreground">State Boards</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-6">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'w-8 bg-primary' 
+                      : 'w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
 
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
+          {/* Stats Row */}
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 mt-10 pt-8 border-t border-border/50">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Users className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-foreground">10,000+</p>
+                <p className="text-sm text-muted-foreground">Students</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-live/10 flex items-center justify-center">
+                <Video className="h-6 w-6 text-live" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-foreground">100+</p>
+                <p className="text-sm text-muted-foreground">Live Courses</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-warning/10 flex items-center justify-center">
+                <Award className="h-6 w-6 text-warning" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-foreground">50+</p>
+                <p className="text-sm text-muted-foreground">Expert Teachers</p>
+              </div>
             </div>
           </div>
         </div>
@@ -334,7 +405,7 @@ export default function LandingPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial) => (
               <div 
                 key={testimonial.name} 
                 className="feature-card p-6 flex flex-col bg-card"
