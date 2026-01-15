@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { CourseCard } from "@/components/courses/CourseCard";
 import { courses } from "@/data/mockData";
-import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, ChevronLeft, ChevronRight, ThumbsUp, GraduationCap } from "lucide-react";
 
 export default function LandingPage() {
   const featuredCourses = courses.slice(0, 6);
@@ -194,17 +194,17 @@ export default function LandingPage() {
           {/* Trust Ratings Bar */}
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-10 pt-8 border-t border-gray-100">
             <div className="flex items-center gap-2">
-              <Star className="h-5 w-5 fill-green-500 text-green-500" />
+              <ThumbsUp className="h-5 w-5 text-green-500" />
               <span className="text-xl font-bold text-gray-900">4.9</span>
               <span className="text-sm text-gray-600">Parent Rating</span>
             </div>
             <div className="flex items-center gap-2">
-              <Star className="h-5 w-5 fill-blue-500 text-blue-500" />
+              <Users className="h-5 w-5 text-blue-500" />
               <span className="text-xl font-bold text-gray-900">10K+</span>
               <span className="text-sm text-gray-600">Students</span>
             </div>
             <div className="flex items-center gap-2">
-              <Star className="h-5 w-5 fill-purple-500 text-purple-500" />
+              <GraduationCap className="h-5 w-5 text-purple-500" />
               <span className="text-xl font-bold text-gray-900">50+</span>
               <span className="text-sm text-gray-600">Expert Teachers</span>
             </div>
