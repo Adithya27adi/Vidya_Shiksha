@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { CourseCard } from "@/components/courses/CourseCard";
 import { courses } from "@/data/mockData";
-import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, ChevronLeft, ChevronRight, ThumbsUp, GraduationCap } from "lucide-react";
+import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, ChevronLeft, ChevronRight, ThumbsUp, GraduationCap, HelpCircle } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function LandingPage() {
   const featuredCourses = courses.slice(0, 6);
@@ -434,6 +440,80 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="section bg-gray-50">
+        <div className="container">
+          <div className="section-header text-center max-w-2xl mx-auto">
+            <div className="badge-accent mb-4 mx-auto w-fit">
+              <HelpCircle className="h-3.5 w-3.5 mr-1" />
+              FAQs
+            </div>
+            <h2 className="text-foreground mb-3">Frequently Asked Questions</h2>
+            <p className="text-muted-foreground text-lg">
+              Find answers to common questions about our platform and courses
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="item-1" className="bg-white rounded-xl border border-gray-200 px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                  What classes do you offer courses for?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5">
+                  We offer comprehensive courses for students from Class 5 to Class 12. Our curriculum covers all major subjects including Mathematics, Science, English, Hindi, Social Science, and Computer Science, aligned with CBSE, ICSE, and various state board syllabi.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-2" className="bg-white rounded-xl border border-gray-200 px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                  What is the difference between Live and Self-Paced courses?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5">
+                  Live courses include real-time interactive sessions with teachers where you can ask questions and get instant doubt clearing. Self-Paced courses are pre-recorded video lectures that you can watch anytime, anywhere at your own convenience with lifetime access.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-3" className="bg-white rounded-xl border border-gray-200 px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                  Do you provide study materials and practice tests?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5">
+                  Yes! All our courses come with comprehensive study materials, chapter-wise notes, practice worksheets, and mock tests. For board exam classes (10th & 12th), we also provide previous year question papers with solutions.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-4" className="bg-white rounded-xl border border-gray-200 px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                  How can I get my doubts cleared?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5">
+                  For Live courses, you can ask questions directly during the class. We also have dedicated doubt-clearing sessions and a discussion forum where teachers respond within 24 hours. Self-Paced students can post their doubts in the course discussion section.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-5" className="bg-white rounded-xl border border-gray-200 px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                  Is there a free trial available?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5">
+                  Yes, we offer free demo classes for all our live courses and free preview lessons for self-paced courses. You can also access our free resources section which includes sample video lessons, study notes, and practice tests.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-6" className="bg-white rounded-xl border border-gray-200 px-6">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                  What is the refund policy?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5">
+                  We offer a 7-day money-back guarantee on all our courses. If you're not satisfied with the course content or teaching quality, you can request a full refund within 7 days of purchase, no questions asked.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>
