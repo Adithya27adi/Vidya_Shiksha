@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { CourseCard } from "@/components/courses/CourseCard";
 import { courses } from "@/data/mockData";
-import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote } from "lucide-react";
+import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote, GraduationCap, PlayCircle, FileText } from "lucide-react";
 
 export default function LandingPage() {
   const featuredCourses = courses.slice(0, 6);
@@ -33,58 +33,123 @@ export default function LandingPage() {
 
   return (
     <MainLayout>
-      {/* Hero Section - Premium with subtle gradient */}
-      <section className="relative overflow-hidden">
-        <div className="hero-gradient absolute inset-0" />
-        <div className="absolute inset-0 pattern-dots opacity-30" />
-        
-        <div className="container relative py-20 md:py-28">
-          <div className="max-w-3xl">
-            {/* Trust badge */}
-            <div className="trust-badge mb-6 animate-fade-in">
-              <Star className="h-4 w-4" />
-              Trusted by 10,000+ students across India
-            </div>
-            
-            <h1 className="text-foreground mb-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              Premium Education for
-              <span className="block gradient-text">Classes 5–12</span>
-            </h1>
-            
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Learn from India's top educators through live interactive sessions or self-paced 
-              recorded courses. Build a strong academic foundation with our comprehensive curriculum.
-            </p>
-            
-            <div className="flex flex-wrap items-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              <Link to="/courses" className="btn-primary px-8 py-3 text-base">
-                Explore Courses
-                <ArrowRight className="ml-2 h-4 w-4" />
+      {/* Hero Section - Great Learning Style */}
+      <section className="bg-secondary/30 overflow-hidden">
+        <div className="container py-12 md:py-16">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Left Content */}
+            <div className="max-w-xl">
+              <h1 className="text-foreground mb-4 text-4xl md:text-5xl font-bold leading-tight">
+                Excel in academics with
+                <span className="block text-primary">expert-led courses</span>
+              </h1>
+              
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                Learn from top faculty with live mentorship and hands-on learning for Classes 5–12.
+              </p>
+              
+              <Link to="/courses" className="btn-primary px-8 py-3 text-base inline-flex">
+                Explore Programs
               </Link>
-              <Link to="/about" className="btn-outline px-8 py-3 text-base">
-                Learn More
-              </Link>
+
+              {/* Trust indicators */}
+              <div className="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-border/50">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Users className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-foreground">10,000+</p>
+                    <p className="text-xs text-muted-foreground">Students</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-live/10 flex items-center justify-center">
+                    <Video className="h-5 w-5 text-live" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-foreground">100+</p>
+                    <p className="text-xs text-muted-foreground">Live Courses</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center">
+                    <Award className="h-5 w-5 text-warning" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-foreground">50+</p>
+                    <p className="text-xs text-muted-foreground">Expert Teachers</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Quick stats inline */}
-            <div className="flex flex-wrap items-center gap-8 mt-12 pt-8 border-t border-border/50 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              {[
-                { number: "50+", label: "Expert Teachers" },
-                { number: "100+", label: "Courses" },
-                { number: "10K+", label: "Active Students" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-2xl font-bold text-foreground">{stat.number}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+            {/* Right - Hero Cards */}
+            <div className="relative hidden lg:block">
+              {/* Main Student Card */}
+              <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-1">
+                <div className="bg-card rounded-3xl p-6 shadow-xl">
+                  <div className="flex gap-6">
+                    {/* Student Image */}
+                    <div className="relative flex-shrink-0">
+                      <img 
+                        src="https://images.unsplash.com/photo-1627556704302-624286467c65?w=280&h=350&fit=crop"
+                        alt="Student"
+                        className="w-44 h-56 object-cover rounded-2xl"
+                      />
+                      {/* Floating badge */}
+                      <div className="absolute -bottom-3 -right-3 bg-live text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5">
+                        <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                        Live Classes
+                      </div>
+                    </div>
+                    
+                    {/* Features List */}
+                    <div className="flex flex-col justify-center gap-3">
+                      {[
+                        { icon: GraduationCap, text: "CBSE & ICSE Aligned", color: "primary" },
+                        { icon: PlayCircle, text: "Interactive Sessions", color: "live" },
+                        { icon: FileText, text: "Practice Tests", color: "accent" },
+                        { icon: Award, text: "Certificates", color: "warning" },
+                      ].map(({ icon: Icon, text, color }) => (
+                        <div 
+                          key={text}
+                          className="flex items-center gap-2.5 px-4 py-2.5 bg-secondary/80 rounded-xl"
+                        >
+                          <Icon className={`h-4 w-4 ${
+                            color === 'primary' ? 'text-primary' :
+                            color === 'live' ? 'text-live' :
+                            color === 'accent' ? 'text-accent' :
+                            'text-warning'
+                          }`} />
+                          <span className="text-sm font-medium text-foreground">{text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Partner logos */}
+                  <div className="flex items-center gap-4 mt-6 pt-4 border-t border-border/50">
+                    <span className="text-xs text-muted-foreground">Aligned with:</span>
+                    <div className="flex items-center gap-3">
+                      <div className="px-3 py-1.5 bg-secondary rounded-lg text-xs font-semibold text-foreground">CBSE</div>
+                      <div className="px-3 py-1.5 bg-secondary rounded-lg text-xs font-semibold text-foreground">ICSE</div>
+                      <div className="px-3 py-1.5 bg-secondary rounded-lg text-xs font-semibold text-foreground">State Boards</div>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Learning Modes - Premium cards */}
-      <section className="section bg-secondary/50">
+      <section className="section">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <h2 className="text-foreground mb-3">Two Ways to Learn</h2>
@@ -165,7 +230,7 @@ export default function LandingPage() {
       </section>
 
       {/* Featured Courses */}
-      <section className="section">
+      <section className="section bg-secondary/50">
         <div className="container">
           <div className="section-header flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>
@@ -196,7 +261,7 @@ export default function LandingPage() {
       </section>
 
       {/* Why Choose Us - Premium grid */}
-      <section className="section bg-secondary/50">
+      <section className="section">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <h2 className="text-foreground mb-3">Why Choose Vidya Shiksha</h2>
@@ -255,7 +320,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="section">
+      <section className="section bg-secondary/50">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <div className="badge-accent mb-4 mx-auto w-fit">
@@ -272,8 +337,7 @@ export default function LandingPage() {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={testimonial.name} 
-                className="feature-card p-6 flex flex-col"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="feature-card p-6 flex flex-col bg-card"
               >
                 {/* Quote icon */}
                 <div className="mb-4">
