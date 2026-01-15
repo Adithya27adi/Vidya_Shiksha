@@ -11,60 +11,68 @@ export default function LandingPage() {
 
   const heroSlides = [
     {
-      title: "Excel in academics with",
-      highlight: "expert-led courses",
-      description: "Learn from top faculty with live mentorship and hands-on learning for Classes 5–12.",
+      id: 1,
+      title: "Excel in academics",
+      titleHighlight: "with expert teachers",
+      description: "Learn from top faculty with live mentorship and hands-on learning.",
       cta: "Explore Programs",
       ctaLink: "/courses",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop",
-      bgGradient: "from-primary/5 to-accent/5",
-      tags: ["Live Classes", "CBSE & ICSE"]
+      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face",
+      bgColor: "bg-gradient-to-br from-amber-100 to-orange-100",
+      badges: ["CBSE", "ICSE", "State Boards"]
     },
     {
-      title: "Master Mathematics with",
-      highlight: "interactive lessons",
-      description: "From basic concepts to advanced problem-solving, build strong foundations with our expert math teachers.",
-      cta: "Start Learning",
+      id: 2,
+      title: "Board exam success",
+      titleHighlight: "starts here",
+      description: "Comprehensive preparation for Class 10 & 12 with mock tests and study material.",
+      cta: "Start Preparation",
       ctaLink: "/courses",
-      image: "https://images.unsplash.com/photo-1596496050827-8299e0220de1?w=600&h=400&fit=crop",
-      bgGradient: "from-live/5 to-primary/5",
-      tags: ["Practice Tests", "Doubt Solving"]
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face",
+      bgColor: "bg-gradient-to-br from-blue-100 to-indigo-100",
+      badges: ["Mock Tests", "Study Notes", "Live Doubt Sessions"]
     },
     {
-      title: "Science made simple with",
-      highlight: "visual learning",
-      description: "Understand complex science concepts through animations, experiments, and real-world examples.",
-      cta: "Explore Science",
+      id: 3,
+      title: "Master Science & Math",
+      titleHighlight: "with visual learning",
+      description: "Interactive lessons with animations and real-world examples.",
+      cta: "Explore Courses",
       ctaLink: "/courses",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop",
-      bgGradient: "from-accent/5 to-warning/5",
-      tags: ["Video Lessons", "Lab Experiments"]
+      image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=400&h=500&fit=crop&crop=face",
+      bgColor: "bg-gradient-to-br from-emerald-100 to-teal-100",
+      badges: ["Video Lessons", "Practice Problems", "Certificates"]
     },
     {
-      title: "Board exam preparation",
-      highlight: "made effective",
-      description: "Comprehensive study material, mock tests, and personalized guidance for Class 10 & 12 board exams.",
-      cta: "Prepare Now",
+      id: 4,
+      title: "Learn at your pace",
+      titleHighlight: "anytime, anywhere",
+      description: "Self-paced recorded courses with lifetime access and flexible schedules.",
+      cta: "Browse Courses",
       ctaLink: "/courses",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop",
-      bgGradient: "from-warning/5 to-live/5",
-      tags: ["Mock Tests", "Result Oriented"]
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=face",
+      bgColor: "bg-gradient-to-br from-purple-100 to-pink-100",
+      badges: ["Lifetime Access", "Mobile App", "Downloadable"]
     }
   ];
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    setCurrentSlide((prev) => (prev + 2 >= heroSlides.length ? 0 : prev + 2));
   }, [heroSlides.length]);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setCurrentSlide((prev) => (prev - 2 < 0 ? Math.max(0, heroSlides.length - 2) : prev - 2));
   }, [heroSlides.length]);
 
-  // Auto-slide every 5 seconds
+  // Auto-slide every 6 seconds
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 6000);
     return () => clearInterval(timer);
   }, [nextSlide]);
+
+  const visibleSlides = heroSlides.slice(currentSlide, currentSlide + 2);
+  const totalPages = Math.ceil(heroSlides.length / 2);
+  const currentPage = Math.floor(currentSlide / 2);
 
   const testimonials = [
     {
@@ -92,135 +100,125 @@ export default function LandingPage() {
 
   return (
     <MainLayout>
-      {/* Hero Carousel Section */}
-      <section className="relative bg-secondary/30 overflow-hidden">
-        <div className="container py-8 md:py-12">
+      {/* Hero Carousel Section - Great Learning Style */}
+      <section className="bg-white py-6 md:py-10">
+        <div className="container">
           {/* Carousel Container */}
           <div className="relative">
-            {/* Navigation Arrows */}
+            {/* Navigation Arrow Left */}
             <button 
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-background shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-11 h-11 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
               aria-label="Previous slide"
             >
-              <ChevronLeft className="h-5 w-5 text-foreground" />
+              <ChevronLeft className="h-5 w-5 text-gray-700" />
             </button>
+
+            {/* Navigation Arrow Right */}
             <button 
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-background shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-11 h-11 rounded-full bg-primary shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
               aria-label="Next slide"
             >
-              <ChevronRight className="h-5 w-5 text-foreground" />
+              <ChevronRight className="h-5 w-5 text-white" />
             </button>
 
-            {/* Slides */}
-            <div className="overflow-hidden rounded-3xl">
-              <div 
-                className="flex transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {heroSlides.map((slide, index) => (
-                  <div 
-                    key={index}
-                    className="w-full flex-shrink-0"
-                  >
-                    <div className={`bg-gradient-to-br ${slide.bgGradient} rounded-3xl p-1`}>
-                      <div className="bg-card rounded-3xl overflow-hidden">
-                        <div className="grid md:grid-cols-2 gap-0">
-                          {/* Left Content */}
-                          <div className="p-8 md:p-12 flex flex-col justify-center">
-                            <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4">
-                              {slide.title}
-                              <span className="block text-primary">{slide.highlight}</span>
-                            </h2>
-                            <p className="text-muted-foreground mb-6 leading-relaxed">
-                              {slide.description}
-                            </p>
-                            <div className="flex flex-wrap gap-2 mb-6">
-                              {slide.tags.map((tag) => (
-                                <span key={tag} className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                            <Link 
-                              to={slide.ctaLink} 
-                              className="btn-primary px-8 py-3 text-base w-fit"
-                            >
-                              {slide.cta}
-                            </Link>
-                          </div>
+            {/* Cards Container */}
+            <div className="grid md:grid-cols-2 gap-5">
+              {visibleSlides.map((slide) => (
+                <div 
+                  key={slide.id}
+                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex h-full">
+                    {/* Left Content */}
+                    <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+                        {slide.title}
+                        <span className="block">{slide.titleHighlight}</span>
+                      </h2>
+                      <p className="text-gray-600 text-sm md:text-base mb-5 leading-relaxed">
+                        {slide.description}
+                      </p>
+                      <Link 
+                        to={slide.ctaLink}
+                        className="inline-flex items-center justify-center px-6 py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors text-sm w-fit"
+                      >
+                        {slide.cta}
+                      </Link>
+                    </div>
 
-                          {/* Right Image */}
-                          <div className="relative hidden md:block">
-                            <img 
-                              src={slide.image}
-                              alt={slide.highlight}
-                              className="w-full h-full object-cover min-h-[400px]"
-                            />
-                            {/* Overlay gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-card/50 to-transparent" />
-                          </div>
-                        </div>
+                    {/* Right Image Section */}
+                    <div className={`relative w-44 md:w-52 flex-shrink-0 ${slide.bgColor}`}>
+                      <img 
+                        src={slide.image}
+                        alt="Student"
+                        className="w-full h-full object-cover object-top"
+                      />
+                      {/* Floating Badges */}
+                      <div className="absolute bottom-4 left-0 right-0 flex flex-wrap justify-center gap-1.5 px-2">
+                        {slide.badges.map((badge, idx) => (
+                          <span 
+                            key={badge}
+                            className={`px-2.5 py-1 text-xs font-medium rounded-full shadow-md ${
+                              idx === 0 ? 'bg-primary text-white' : 'bg-white text-gray-700 border border-gray-200'
+                            }`}
+                          >
+                            {badge}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
             {/* Dots Indicator */}
             <div className="flex justify-center gap-2 mt-6">
-              {heroSlides.map((_, index) => (
+              {Array.from({ length: totalPages }).map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    index === currentSlide 
-                      ? 'w-8 bg-primary' 
-                      : 'w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  onClick={() => setCurrentSlide(index * 2)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentPage 
+                      ? 'w-6 bg-gray-800' 
+                      : 'w-2 bg-gray-300 hover:bg-gray-400'
                   }`}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={`Go to page ${index + 1}`}
                 />
               ))}
             </div>
           </div>
 
-          {/* Stats Row */}
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 mt-10 pt-8 border-t border-border/50">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">10,000+</p>
-                <p className="text-sm text-muted-foreground">Students</p>
-              </div>
+          {/* Trust Ratings Bar */}
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-10 pt-8 border-t border-gray-100">
+            <div className="flex items-center gap-2">
+              <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+              <span className="text-xl font-bold text-gray-900">4.8</span>
+              <span className="text-sm text-gray-600">Google Reviews</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-live/10 flex items-center justify-center">
-                <Video className="h-6 w-6 text-live" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">100+</p>
-                <p className="text-sm text-muted-foreground">Live Courses</p>
-              </div>
+            <div className="flex items-center gap-2">
+              <Star className="h-5 w-5 fill-green-500 text-green-500" />
+              <span className="text-xl font-bold text-gray-900">4.9</span>
+              <span className="text-sm text-gray-600">Parent Rating</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-warning/10 flex items-center justify-center">
-                <Award className="h-6 w-6 text-warning" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">50+</p>
-                <p className="text-sm text-muted-foreground">Expert Teachers</p>
-              </div>
+            <div className="flex items-center gap-2">
+              <Star className="h-5 w-5 fill-blue-500 text-blue-500" />
+              <span className="text-xl font-bold text-gray-900">10K+</span>
+              <span className="text-sm text-gray-600">Students</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Star className="h-5 w-5 fill-purple-500 text-purple-500" />
+              <span className="text-xl font-bold text-gray-900">50+</span>
+              <span className="text-sm text-gray-600">Expert Teachers</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Learning Modes - Premium cards */}
-      <section className="section">
+      <section className="section bg-gray-50">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <h2 className="text-foreground mb-3">Two Ways to Learn</h2>
@@ -301,7 +299,7 @@ export default function LandingPage() {
       </section>
 
       {/* Featured Courses */}
-      <section className="section bg-secondary/50">
+      <section className="section">
         <div className="container">
           <div className="section-header flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>
@@ -332,7 +330,7 @@ export default function LandingPage() {
       </section>
 
       {/* Why Choose Us - Premium grid */}
-      <section className="section">
+      <section className="section bg-gray-50">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <h2 className="text-foreground mb-3">Why Choose Vidya Shiksha</h2>
@@ -391,7 +389,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="section bg-secondary/50">
+      <section className="section">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <div className="badge-accent mb-4 mx-auto w-fit">
