@@ -584,71 +584,41 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA Section - Modern Premium Design */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl" />
+      {/* CTA Section - Clean Professional Design */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600">
+        {/* Subtle Decorative Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
         </div>
         
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }} />
-        
-        <div className="container relative py-20 md:py-28">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full mb-8 border border-white/20">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-white/90">Limited Time: Free Access to Demo Classes</span>
+        <div className="container relative py-14 md:py-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Left Content */}
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                Ready to Start Your Learning Journey?
+              </h2>
+              <p className="text-white/70 text-sm md:text-base">
+                Join 10,000+ students achieving their academic goals
+              </p>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Ready to Start Your
-              <span className="block mt-2 bg-gradient-to-r from-white via-purple-100 to-white bg-clip-text text-transparent">
-                Learning Journey?
-              </span>
-            </h2>
-            
-            <p className="text-white/70 mb-10 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
-              Join thousands of students who are achieving their academic goals with Vidya Shiksha.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Right CTA */}
+            <div className="flex items-center gap-3">
               <Link 
                 to="/signup" 
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-50 transition-all duration-300 shadow-2xl shadow-black/20 hover:shadow-black/30 hover:-translate-y-1"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 Get Started Free
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link 
                 to="/courses" 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300"
+                className="hidden sm:inline-flex items-center px-6 py-3 text-white font-medium rounded-full border border-white/30 hover:bg-white/10 transition-all duration-200"
               >
-                Explore Courses
+                View Courses
               </Link>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex items-center justify-center gap-8 mt-12 pt-8 border-t border-white/10">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-white">10K+</p>
-                <p className="text-sm text-white/60">Students</p>
-              </div>
-              <div className="w-px h-10 bg-white/20" />
-              <div className="text-center">
-                <p className="text-2xl font-bold text-white">50+</p>
-                <p className="text-sm text-white/60">Courses</p>
-              </div>
-              <div className="w-px h-10 bg-white/20" />
-              <div className="text-center">
-                <p className="text-2xl font-bold text-white">4.9★</p>
-                <p className="text-sm text-white/60">Rating</p>
-              </div>
             </div>
           </div>
         </div>
