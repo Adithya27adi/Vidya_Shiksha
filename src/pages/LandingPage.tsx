@@ -2,116 +2,135 @@ import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { CourseCard } from "@/components/courses/CourseCard";
 import { courses } from "@/data/mockData";
-import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle } from "lucide-react";
+import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Sparkles, Shield, Clock } from "lucide-react";
 
 export default function LandingPage() {
   const featuredCourses = courses.slice(0, 6);
-  const classLevels = [5, 6, 7, 8, 9, 10];
+  const classLevels = [5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <MainLayout>
-      {/* Hero Section */}
-      <section className="bg-secondary py-16 md:py-20">
-        <div className="container">
+      {/* Hero Section - Premium with subtle gradient */}
+      <section className="relative overflow-hidden">
+        <div className="hero-gradient absolute inset-0" />
+        <div className="absolute inset-0 pattern-dots opacity-30" />
+        
+        <div className="container relative py-20 md:py-28">
           <div className="max-w-3xl">
-            <p className="text-sm font-medium text-primary mb-3">
-              Trusted by 10,000+ students
-            </p>
-            <h1 className="text-foreground mb-4">
-              Quality Education for Classes 5–12
+            {/* Trust badge */}
+            <div className="trust-badge mb-6 animate-fade-in">
+              <Star className="h-4 w-4" />
+              Trusted by 10,000+ students across India
+            </div>
+            
+            <h1 className="text-foreground mb-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              Premium Education for
+              <span className="block gradient-text">Classes 5–12</span>
             </h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-              Learn from expert teachers through live interactive sessions or self-paced 
-              recorded courses. Build a strong foundation for academic success.
+            
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              Learn from India's top educators through live interactive sessions or self-paced 
+              recorded courses. Build a strong academic foundation with our comprehensive curriculum.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link to="/courses" className="btn-primary px-6 py-2.5">
+            
+            <div className="flex flex-wrap items-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <Link to="/courses" className="btn-primary px-8 py-3 text-base">
                 Explore Courses
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <Link to="/about" className="btn-outline px-6 py-2.5">
+              <Link to="/about" className="btn-outline px-8 py-3 text-base">
                 Learn More
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Stats Bar */}
-      <section className="border-b border-border py-8">
-        <div className="container">
-          <div className="grid grid-cols-3 gap-8 max-w-lg">
-            <div className="stat-item">
-              <div className="stat-number">50+</div>
-              <div className="stat-label">Teachers</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">100+</div>
-              <div className="stat-label">Courses</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">10K+</div>
-              <div className="stat-label">Students</div>
+            {/* Quick stats inline */}
+            <div className="flex flex-wrap items-center gap-8 mt-12 pt-8 border-t border-border/50 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              {[
+                { number: "50+", label: "Expert Teachers" },
+                { number: "100+", label: "Courses" },
+                { number: "10K+", label: "Active Students" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-2xl font-bold text-foreground">{stat.number}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Browse by Class */}
-      <section className="section">
+      {/* Browse by Class - Premium grid */}
+      <section className="section bg-secondary/50">
         <div className="container">
-          <div className="section-header">
-            <h2 className="text-foreground mb-2">Browse by Class</h2>
-            <p className="text-muted-foreground">
-              Find courses tailored to your grade level
+          <div className="section-header text-center max-w-2xl mx-auto">
+            <div className="badge-accent mb-4 mx-auto w-fit">
+              <Sparkles className="h-3.5 w-3.5 mr-1" />
+              Choose Your Level
+            </div>
+            <h2 className="text-foreground mb-3">Browse by Class</h2>
+            <p className="text-muted-foreground text-lg">
+              Curated courses tailored specifically for your grade level
             </p>
           </div>
 
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-            {classLevels.map((level) => (
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+            {classLevels.map((level, index) => (
               <Link
                 key={level}
                 to={`/courses?class=${level}`}
-                className="feature-card text-center py-6 hover:border-primary transition-colors"
+                className="grid-card text-center py-8 group"
+                style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <span className="text-2xl font-bold text-foreground block mb-1">
+                <span className="text-3xl font-extrabold gradient-text block mb-2 group-hover:scale-110 transition-transform">
                   {level}
                 </span>
-                <span className="text-sm text-muted-foreground">Class</span>
+                <span className="text-sm font-medium text-muted-foreground">Class</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Learning Modes */}
-      <section className="section bg-secondary">
+      {/* Learning Modes - Premium cards */}
+      <section className="section">
         <div className="container">
-          <div className="section-header">
-            <h2 className="text-foreground mb-2">Two Ways to Learn</h2>
-            <p className="text-muted-foreground">
-              Choose the learning style that works best for you
+          <div className="section-header text-center max-w-2xl mx-auto">
+            <h2 className="text-foreground mb-3">Two Ways to Learn</h2>
+            <p className="text-muted-foreground text-lg">
+              Choose the learning style that best fits your schedule and preferences
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
-            <div className="feature-card bg-background">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-md bg-live/10 flex items-center justify-center flex-shrink-0">
-                  <Video className="h-5 w-5 text-live" />
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Live Classes Card */}
+            <div className="feature-card p-8 group">
+              <div className="flex items-start gap-5">
+                <div className="icon-wrapper-live flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Video className="h-7 w-7 text-live" />
                 </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-foreground">Live Classes</h3>
-                    <span className="badge-live">Live</span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <h3 className="text-xl font-bold text-foreground">Live Interactive Classes</h3>
+                    <span className="badge-live">
+                      <span className="w-2 h-2 bg-live rounded-full animate-pulse" />
+                      Live
+                    </span>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Interactive sessions with real-time Q&A and discussions.
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    Engage in real-time with expert teachers through interactive sessions with instant doubt clearing.
                   </p>
-                  <ul className="space-y-2">
-                    {["Real-time interaction", "Scheduled sessions", "Doubt clearing"].map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CheckCircle className="h-4 w-4 text-live" />
-                        {item}
+                  <ul className="space-y-3">
+                    {[
+                      { text: "Real-time Q&A sessions", icon: CheckCircle },
+                      { text: "Scheduled class timings", icon: Clock },
+                      { text: "Live doubt clearing", icon: Shield },
+                    ].map(({ text, icon: Icon }) => (
+                      <li key={text} className="flex items-center gap-3 text-sm text-foreground">
+                        <div className="w-5 h-5 rounded-full bg-live/10 flex items-center justify-center">
+                          <Icon className="h-3 w-3 text-live" />
+                        </div>
+                        {text}
                       </li>
                     ))}
                   </ul>
@@ -119,24 +138,31 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="feature-card bg-background">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <BookOpen className="h-5 w-5 text-primary" />
+            {/* Self-Paced Card */}
+            <div className="feature-card p-8 group">
+              <div className="flex items-start gap-5">
+                <div className="icon-wrapper-primary flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <BookOpen className="h-7 w-7 text-primary" />
                 </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-foreground">Self-Paced</h3>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <h3 className="text-xl font-bold text-foreground">Self-Paced Learning</h3>
                     <span className="badge-recorded">Recorded</span>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Learn at your own speed with recorded lectures.
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    Learn at your own pace with high-quality recorded lectures you can watch anytime, anywhere.
                   </p>
-                  <ul className="space-y-2">
-                    {["Learn anytime", "Flexible schedule", "Lifetime access"].map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CheckCircle className="h-4 w-4 text-primary" />
-                        {item}
+                  <ul className="space-y-3">
+                    {[
+                      { text: "Learn anytime, anywhere", icon: CheckCircle },
+                      { text: "Flexible schedule", icon: Clock },
+                      { text: "Lifetime access", icon: Shield },
+                    ].map(({ text, icon: Icon }) => (
+                      <li key={text} className="flex items-center gap-3 text-sm text-foreground">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
+                          <Icon className="h-3 w-3 text-primary" />
+                        </div>
+                        {text}
                       </li>
                     ))}
                   </ul>
@@ -148,21 +174,25 @@ export default function LandingPage() {
       </section>
 
       {/* Featured Courses */}
-      <section className="section">
+      <section className="section bg-secondary/50">
         <div className="container">
-          <div className="section-header flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="section-header flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>
-              <h2 className="text-foreground mb-1">Featured Courses</h2>
-              <p className="text-muted-foreground">
-                Popular courses across all subjects
+              <div className="badge-accent mb-4 w-fit">
+                <Star className="h-3.5 w-3.5 mr-1" />
+                Popular Picks
+              </div>
+              <h2 className="text-foreground mb-2">Featured Courses</h2>
+              <p className="text-muted-foreground text-lg">
+                Our most popular courses across all subjects and grade levels
               </p>
             </div>
             <Link 
               to="/courses" 
-              className="inline-flex items-center gap-1 text-sm text-primary font-medium hover:underline"
+              className="btn-outline group"
             >
               View all courses
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
@@ -174,50 +204,83 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="section bg-secondary">
+      {/* Why Choose Us - Premium grid */}
+      <section className="section">
         <div className="container">
-          <div className="section-header">
-            <h2 className="text-foreground mb-2">Why Choose EduLearn</h2>
-            <p className="text-muted-foreground">
-              Trusted by students and parents across India
+          <div className="section-header text-center max-w-2xl mx-auto">
+            <h2 className="text-foreground mb-3">Why Choose EduLearn</h2>
+            <p className="text-muted-foreground text-lg">
+              Trusted by students and parents across India for quality education
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Users, title: "Expert Teachers", desc: "Qualified and experienced educators" },
-              { icon: BookOpen, title: "Comprehensive Curriculum", desc: "Aligned with CBSE and ICSE boards" },
-              { icon: Video, title: "Flexible Learning", desc: "Live or self-paced options" },
-              { icon: Award, title: "Proven Results", desc: "Students improve their grades" },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="feature-card bg-background">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-3">
-                  <Icon className="h-5 w-5 text-primary" />
+              { 
+                icon: Users, 
+                title: "Expert Teachers", 
+                desc: "Learn from qualified educators with years of teaching experience",
+                color: "primary"
+              },
+              { 
+                icon: BookOpen, 
+                title: "Comprehensive Curriculum", 
+                desc: "Aligned with CBSE, ICSE, and state board syllabi",
+                color: "accent"
+              },
+              { 
+                icon: Video, 
+                title: "Flexible Learning", 
+                desc: "Choose between live classes or self-paced recorded courses",
+                color: "live"
+              },
+              { 
+                icon: Award, 
+                title: "Proven Results", 
+                desc: "Students consistently improve their grades and confidence",
+                color: "warning"
+              },
+            ].map(({ icon: Icon, title, desc, color }) => (
+              <div key={title} className="grid-card group">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110 ${
+                  color === 'primary' ? 'bg-primary/10' :
+                  color === 'accent' ? 'bg-accent/10' :
+                  color === 'live' ? 'bg-live/10' :
+                  'bg-warning/10'
+                }`}>
+                  <Icon className={`h-7 w-7 ${
+                    color === 'primary' ? 'text-primary' :
+                    color === 'accent' ? 'text-accent' :
+                    color === 'live' ? 'text-live' :
+                    'text-warning'
+                  }`} />
                 </div>
-                <h4 className="font-semibold text-foreground mb-1">{title}</h4>
-                <p className="text-sm text-muted-foreground">{desc}</p>
+                <h4 className="font-bold text-foreground text-lg mb-2">{title}</h4>
+                <p className="text-muted-foreground leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary">
-        <div className="container text-center">
-          <h2 className="text-2xl font-bold text-primary-foreground mb-3">
-            Ready to Start Learning?
+      {/* CTA Section - Premium gradient */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 gradient-bg" />
+        <div className="absolute inset-0 pattern-dots opacity-10" />
+        
+        <div className="container relative py-20 md:py-24 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Start Your Learning Journey?
           </h2>
-          <p className="text-primary-foreground/80 mb-6 max-w-md mx-auto">
-            Join thousands of students who are improving their grades with EduLearn.
+          <p className="text-white/80 mb-8 max-w-xl mx-auto text-lg">
+            Join thousands of students who are achieving their academic goals with EduLearn.
           </p>
           <Link 
             to="/signup" 
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-background text-foreground font-medium rounded-md hover:bg-background/90 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-foreground font-semibold rounded-xl hover:bg-white/95 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             Get Started Free
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       </section>
