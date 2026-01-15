@@ -584,38 +584,30 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA Section - Clean Professional Design */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600">
-        {/* Subtle Decorative Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-        </div>
-        
-        <div className="container relative py-14 md:py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Left Content */}
-            <div className="text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+      {/* CTA Section */}
+      <section className="bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600">
+        <div className="container py-16 md:py-20">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
                 Ready to Start Your Learning Journey?
               </h2>
-              <p className="text-white/70 text-sm md:text-base">
-                Join 10,000+ students achieving their academic goals
+              <p className="text-white/80 text-base md:text-lg">
+                Join 10,000+ students achieving their academic goals with Vidya Shiksha
               </p>
             </div>
             
-            {/* Right CTA */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-row items-center gap-4 flex-shrink-0">
               <Link 
                 to="/signup" 
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition-all whitespace-nowrap"
               >
                 Get Started Free
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="h-5 w-5" />
               </Link>
               <Link 
                 to="/courses" 
-                className="hidden sm:inline-flex items-center px-6 py-3 text-white font-medium rounded-full border border-white/30 hover:bg-white/10 transition-all duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 text-white font-semibold rounded-full border-2 border-white/40 hover:bg-white/10 transition-all whitespace-nowrap"
               >
                 View Courses
               </Link>
