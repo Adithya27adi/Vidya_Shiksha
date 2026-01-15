@@ -102,7 +102,37 @@ export default function LandingPage() {
       content: "The self-paced courses gave me flexibility to balance board exam preparation with competitive exams. Highly recommend for serious students!",
       rating: 5
     },
+    {
+      name: "Vikram Singh",
+      role: "Class 9 Student",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+      content: "The doubt-clearing sessions are amazing! I can ask any question and get detailed explanations. My understanding of Science has improved tremendously.",
+      rating: 5
+    },
+    {
+      name: "Meera Joshi",
+      role: "Parent of Class 6 Student",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
+      content: "Finally found a platform that makes learning fun for my daughter. The interactive quizzes and animations keep her engaged throughout the lessons.",
+      rating: 5
+    },
   ];
+
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  const nextTestimonial = useCallback(() => {
+    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
+
+  const prevTestimonial = useCallback(() => {
+    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
+
+  // Auto-slide testimonials every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(nextTestimonial, 5000);
+    return () => clearInterval(timer);
+  }, [nextTestimonial]);
 
   return (
     <MainLayout>
@@ -389,131 +419,174 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="section">
+      {/* FAQ Section - Modern Design */}
+      <section className="section bg-gradient-to-b from-white to-gray-50">
         <div className="container">
-          <div className="section-header text-center max-w-2xl mx-auto">
-            <div className="badge-accent mb-4 mx-auto w-fit">
-              <Quote className="h-3.5 w-3.5 mr-1" />
-              Student Stories
-            </div>
-            <h2 className="text-foreground mb-3">What Our Students Say</h2>
-            <p className="text-muted-foreground text-lg">
-              Hear from students and parents who transformed their learning journey with us
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial) => (
-              <div 
-                key={testimonial.name} 
-                className="feature-card p-6 flex flex-col bg-card"
-              >
-                {/* Quote icon */}
-                <div className="mb-4">
-                  <Quote className="h-8 w-8 text-primary/20" />
-                </div>
-                
-                {/* Rating */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-warning text-warning" />
-                  ))}
-                </div>
-                
-                {/* Content */}
-                <p className="text-foreground leading-relaxed flex-1 mb-6">
-                  "{testimonial.content}"
-                </p>
-                
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="font-semibold text-foreground">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                  </div>
-                </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left - Header */}
+            <div className="lg:sticky lg:top-24">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                <HelpCircle className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-primary">FAQs</span>
               </div>
-            ))}
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Got Questions?<br />
+                <span className="text-primary">We've Got Answers</span>
+              </h2>
+              <p className="text-muted-foreground text-lg mb-6">
+                Everything you need to know about our courses and platform. Can't find what you're looking for?
+              </p>
+              <a href="#" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline">
+                Contact our support team
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+
+            {/* Right - Accordion */}
+            <div>
+              <Accordion type="single" collapsible className="space-y-3">
+                <AccordionItem value="item-1" className="bg-white rounded-2xl border-0 shadow-sm px-6 data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5 gap-4">
+                    What classes do you offer courses for?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    We offer comprehensive courses for students from Class 5 to Class 12. Our curriculum covers all major subjects including Mathematics, Science, English, Hindi, Social Science, and Computer Science, aligned with CBSE, ICSE, and various state board syllabi.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-2" className="bg-white rounded-2xl border-0 shadow-sm px-6 data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5 gap-4">
+                    What is the difference between Live and Self-Paced courses?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    Live courses include real-time interactive sessions with teachers where you can ask questions and get instant doubt clearing. Self-Paced courses are pre-recorded video lectures that you can watch anytime, anywhere at your own convenience with lifetime access.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-3" className="bg-white rounded-2xl border-0 shadow-sm px-6 data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5 gap-4">
+                    Do you provide study materials and practice tests?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    Yes! All our courses come with comprehensive study materials, chapter-wise notes, practice worksheets, and mock tests. For board exam classes (10th & 12th), we also provide previous year question papers with solutions.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-4" className="bg-white rounded-2xl border-0 shadow-sm px-6 data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5 gap-4">
+                    How can I get my doubts cleared?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    For Live courses, you can ask questions directly during the class. We also have dedicated doubt-clearing sessions and a discussion forum where teachers respond within 24 hours. Self-Paced students can post their doubts in the course discussion section.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-5" className="bg-white rounded-2xl border-0 shadow-sm px-6 data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5 gap-4">
+                    Is there a free trial available?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    Yes, we offer free demo classes for all our live courses and free preview lessons for self-paced courses. You can also access our free resources section which includes sample video lessons, study notes, and practice tests.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-6" className="bg-white rounded-2xl border-0 shadow-sm px-6 data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5 gap-4">
+                    What is the refund policy?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    We offer a 7-day money-back guarantee on all our courses. If you're not satisfied with the course content or teaching quality, you can request a full refund within 7 days of purchase, no questions asked.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="section bg-gray-50">
+      {/* Testimonials Section - Modern Sliding Carousel */}
+      <section className="section bg-[#0f172a] text-white overflow-hidden">
         <div className="container">
-          <div className="section-header text-center max-w-2xl mx-auto">
-            <div className="badge-accent mb-4 mx-auto w-fit">
-              <HelpCircle className="h-3.5 w-3.5 mr-1" />
-              FAQs
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6">
+              <Quote className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-white/90">Testimonials</span>
             </div>
-            <h2 className="text-foreground mb-3">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground text-lg">
-              Find answers to common questions about our platform and courses
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Loved by Students & Parents
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
+              Join thousands of happy learners who transformed their academic journey
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-1" className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  What classes do you offer courses for?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
-                  We offer comprehensive courses for students from Class 5 to Class 12. Our curriculum covers all major subjects including Mathematics, Science, English, Hindi, Social Science, and Computer Science, aligned with CBSE, ICSE, and various state board syllabi.
-                </AccordionContent>
-              </AccordionItem>
+          {/* Testimonial Carousel */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Navigation Arrows */}
+            <button 
+              onClick={prevTestimonial}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="h-5 w-5 text-white" />
+            </button>
 
-              <AccordionItem value="item-2" className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  What is the difference between Live and Self-Paced courses?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
-                  Live courses include real-time interactive sessions with teachers where you can ask questions and get instant doubt clearing. Self-Paced courses are pre-recorded video lectures that you can watch anytime, anywhere at your own convenience with lifetime access.
-                </AccordionContent>
-              </AccordionItem>
+            <button 
+              onClick={nextTestimonial}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-10 w-12 h-12 rounded-full bg-primary border border-primary flex items-center justify-center hover:bg-primary/90 transition-colors"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="h-5 w-5 text-white" />
+            </button>
 
-              <AccordionItem value="item-3" className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  Do you provide study materials and practice tests?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
-                  Yes! All our courses come with comprehensive study materials, chapter-wise notes, practice worksheets, and mock tests. For board exam classes (10th & 12th), we also provide previous year question papers with solutions.
-                </AccordionContent>
-              </AccordionItem>
+            {/* Testimonial Card */}
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/10">
+              <div className="flex flex-col items-center text-center">
+                {/* Large Quote Icon */}
+                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-8">
+                  <Quote className="h-8 w-8 text-primary" />
+                </div>
 
-              <AccordionItem value="item-4" className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  How can I get my doubts cleared?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
-                  For Live courses, you can ask questions directly during the class. We also have dedicated doubt-clearing sessions and a discussion forum where teachers respond within 24 hours. Self-Paced students can post their doubts in the course discussion section.
-                </AccordionContent>
-              </AccordionItem>
+                {/* Rating */}
+                <div className="flex gap-1.5 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
 
-              <AccordionItem value="item-5" className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  Is there a free trial available?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
-                  Yes, we offer free demo classes for all our live courses and free preview lessons for self-paced courses. You can also access our free resources section which includes sample video lessons, study notes, and practice tests.
-                </AccordionContent>
-              </AccordionItem>
+                {/* Content */}
+                <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-2xl font-light">
+                  "{testimonials[testimonialIndex].content}"
+                </p>
 
-              <AccordionItem value="item-6" className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  What is the refund policy?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
-                  We offer a 7-day money-back guarantee on all our courses. If you're not satisfied with the course content or teaching quality, you can request a full refund within 7 days of purchase, no questions asked.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+                {/* Author */}
+                <div className="flex flex-col items-center">
+                  <img 
+                    src={testimonials[testimonialIndex].image} 
+                    alt={testimonials[testimonialIndex].name}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-primary mb-4"
+                  />
+                  <p className="font-semibold text-white text-lg">{testimonials[testimonialIndex].name}</p>
+                  <p className="text-white/60">{testimonials[testimonialIndex].role}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-8">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setTestimonialIndex(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === testimonialIndex 
+                      ? 'w-8 bg-primary' 
+                      : 'w-2 bg-white/30 hover:bg-white/50'
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
