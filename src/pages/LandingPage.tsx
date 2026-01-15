@@ -13,7 +13,7 @@ export default function LandingPage() {
   return (
     <MainLayout>
       {/* Hero Section */}
-      <section className="bg-surface-subtle border-b border-border">
+      <section className="bg-secondary border-b border-border">
         <div className="container py-16 md:py-24">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-display-md md:text-display-lg text-foreground mb-6">
@@ -58,7 +58,7 @@ export default function LandingPage() {
       </section>
 
       {/* Learning Modes */}
-      <section className="section bg-surface-subtle border-y border-border">
+      <section className="section bg-secondary border-y border-border">
         <div className="container">
           <div className="section-header text-center">
             <h2 className="text-foreground mb-3">Two Ways to Learn</h2>
@@ -151,7 +151,7 @@ export default function LandingPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="section bg-surface-subtle border-t border-border">
+      <section className="section bg-secondary border-t border-border">
         <div className="container">
           <div className="section-header text-center">
             <h2 className="text-foreground mb-3">Why Choose EduLearn</h2>
