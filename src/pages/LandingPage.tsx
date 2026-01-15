@@ -208,7 +208,7 @@ export default function LandingPage() {
       <section className="section">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
-            <h2 className="text-foreground mb-3">Why Choose EduLearn</h2>
+            <h2 className="text-foreground mb-3">Why Choose Vidya Shiksha</h2>
             <p className="text-muted-foreground text-lg">
               Trusted by students and parents across India for quality education
             </p>
@@ -273,7 +273,7 @@ export default function LandingPage() {
             Ready to Start Your Learning Journey?
           </h2>
           <p className="text-white/80 mb-8 max-w-xl mx-auto text-lg">
-            Join thousands of students who are achieving their academic goals with EduLearn.
+            Join thousands of students who are achieving their academic goals with Vidya Shiksha.
           </p>
           <Link 
             to="/signup" 
