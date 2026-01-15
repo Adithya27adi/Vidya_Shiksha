@@ -2,11 +2,34 @@ import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { CourseCard } from "@/components/courses/CourseCard";
 import { courses } from "@/data/mockData";
-import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Sparkles, Shield, Clock } from "lucide-react";
+import { BookOpen, Users, Video, Award, ArrowRight, CheckCircle, Star, Shield, Clock, Quote } from "lucide-react";
 
 export default function LandingPage() {
   const featuredCourses = courses.slice(0, 6);
-  const classLevels = [5, 6, 7, 8, 9, 10, 11, 12];
+
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      role: "Class 10 Student",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+      content: "Vidya Shiksha helped me improve my Math scores from 65% to 92%. The live classes are interactive and the teachers explain concepts so clearly!",
+      rating: 5
+    },
+    {
+      name: "Rajesh Kumar",
+      role: "Parent of Class 8 Student",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      content: "As a parent, I'm impressed by the quality of education. My son now looks forward to his study time. The recorded lectures are a blessing for revision.",
+      rating: 5
+    },
+    {
+      name: "Ananya Patel",
+      role: "Class 12 Student",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+      content: "The self-paced courses gave me flexibility to balance board exam preparation with competitive exams. Highly recommend for serious students!",
+      rating: 5
+    },
+  ];
 
   return (
     <MainLayout>
@@ -60,40 +83,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Browse by Class - Premium grid */}
-      <section className="section bg-secondary/50">
-        <div className="container">
-          <div className="section-header text-center max-w-2xl mx-auto">
-            <div className="badge-accent mb-4 mx-auto w-fit">
-              <Sparkles className="h-3.5 w-3.5 mr-1" />
-              Choose Your Level
-            </div>
-            <h2 className="text-foreground mb-3">Browse by Class</h2>
-            <p className="text-muted-foreground text-lg">
-              Curated courses tailored specifically for your grade level
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-            {classLevels.map((level, index) => (
-              <Link
-                key={level}
-                to={`/courses?class=${level}`}
-                className="grid-card text-center py-8 group"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <span className="text-3xl font-extrabold gradient-text block mb-2 group-hover:scale-110 transition-transform">
-                  {level}
-                </span>
-                <span className="text-sm font-medium text-muted-foreground">Class</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Learning Modes - Premium cards */}
-      <section className="section">
+      <section className="section bg-secondary/50">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <h2 className="text-foreground mb-3">Two Ways to Learn</h2>
@@ -174,7 +165,7 @@ export default function LandingPage() {
       </section>
 
       {/* Featured Courses */}
-      <section className="section bg-secondary/50">
+      <section className="section">
         <div className="container">
           <div className="section-header flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>
@@ -205,7 +196,7 @@ export default function LandingPage() {
       </section>
 
       {/* Why Choose Us - Premium grid */}
-      <section className="section">
+      <section className="section bg-secondary/50">
         <div className="container">
           <div className="section-header text-center max-w-2xl mx-auto">
             <h2 className="text-foreground mb-3">Why Choose Vidya Shiksha</h2>
@@ -257,6 +248,62 @@ export default function LandingPage() {
                 </div>
                 <h4 className="font-bold text-foreground text-lg mb-2">{title}</h4>
                 <p className="text-muted-foreground leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="section">
+        <div className="container">
+          <div className="section-header text-center max-w-2xl mx-auto">
+            <div className="badge-accent mb-4 mx-auto w-fit">
+              <Quote className="h-3.5 w-3.5 mr-1" />
+              Student Stories
+            </div>
+            <h2 className="text-foreground mb-3">What Our Students Say</h2>
+            <p className="text-muted-foreground text-lg">
+              Hear from students and parents who transformed their learning journey with us
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={testimonial.name} 
+                className="feature-card p-6 flex flex-col"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Quote icon */}
+                <div className="mb-4">
+                  <Quote className="h-8 w-8 text-primary/20" />
+                </div>
+                
+                {/* Rating */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-warning text-warning" />
+                  ))}
+                </div>
+                
+                {/* Content */}
+                <p className="text-foreground leading-relaxed flex-1 mb-6">
+                  "{testimonial.content}"
+                </p>
+                
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold text-foreground">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
