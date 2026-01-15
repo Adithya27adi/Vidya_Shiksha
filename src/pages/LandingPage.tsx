@@ -194,11 +194,6 @@ export default function LandingPage() {
           {/* Trust Ratings Bar */}
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-10 pt-8 border-t border-gray-100">
             <div className="flex items-center gap-2">
-              <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-              <span className="text-xl font-bold text-gray-900">4.8</span>
-              <span className="text-sm text-gray-600">Google Reviews</span>
-            </div>
-            <div className="flex items-center gap-2">
               <Star className="h-5 w-5 fill-green-500 text-green-500" />
               <span className="text-xl font-bold text-gray-900">4.9</span>
               <span className="text-sm text-gray-600">Parent Rating</span>
