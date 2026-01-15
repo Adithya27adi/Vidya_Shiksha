@@ -17,6 +17,7 @@ export function Header() {
   const publicLinks = [
     { href: "/courses", label: "Courses" },
     { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const authLinks = [
