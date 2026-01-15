@@ -504,88 +504,81 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section - Modern Sliding Carousel */}
-      <section className="section bg-[#0f172a] text-white overflow-hidden">
+      {/* Testimonials Section - Compact Modern Design */}
+      <section className="py-16 bg-[#0f172a]">
         <div className="container">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6">
-              <Quote className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-white/90">Testimonials</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Loved by Students & Parents
-            </h2>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Join thousands of happy learners who transformed their academic journey
-            </p>
-          </div>
-
-          {/* Testimonial Carousel */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Navigation Arrows */}
-            <button 
-              onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="h-5 w-5 text-white" />
-            </button>
-
-            <button 
-              onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-10 w-12 h-12 rounded-full bg-primary border border-primary flex items-center justify-center hover:bg-primary/90 transition-colors"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="h-5 w-5 text-white" />
-            </button>
-
-            {/* Testimonial Card */}
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/10">
-              <div className="flex flex-col items-center text-center">
-                {/* Large Quote Icon */}
-                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-8">
-                  <Quote className="h-8 w-8 text-primary" />
-                </div>
-
-                {/* Rating */}
-                <div className="flex gap-1.5 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-
-                {/* Content */}
-                <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-2xl font-light">
-                  "{testimonials[testimonialIndex].content}"
-                </p>
-
-                {/* Author */}
-                <div className="flex flex-col items-center">
-                  <img 
-                    src={testimonials[testimonialIndex].image} 
-                    alt={testimonials[testimonialIndex].name}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-primary mb-4"
-                  />
-                  <p className="font-semibold text-white text-lg">{testimonials[testimonialIndex].name}</p>
-                  <p className="text-white/60">{testimonials[testimonialIndex].role}</p>
-                </div>
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            {/* Left - Header */}
+            <div className="md:w-1/3 text-center md:text-left">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                What Our Students Say
+              </h3>
+              <p className="text-white/60 text-sm mb-4">
+                Trusted by 10,000+ students
+              </p>
+              <div className="flex items-center justify-center md:justify-start gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                ))}
+                <span className="text-white/80 text-sm ml-2">4.9/5</span>
               </div>
             </div>
 
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-8">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setTestimonialIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === testimonialIndex 
-                      ? 'w-8 bg-primary' 
-                      : 'w-2 bg-white/30 hover:bg-white/50'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
+            {/* Right - Testimonial Card */}
+            <div className="md:w-2/3 relative">
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                <div className="flex items-start gap-4">
+                  <img 
+                    src={testimonials[testimonialIndex].image} 
+                    alt={testimonials[testimonialIndex].name}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-primary flex-shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="font-semibold text-white">{testimonials[testimonialIndex].name}</p>
+                      <span className="text-white/40">•</span>
+                      <p className="text-white/60 text-sm">{testimonials[testimonialIndex].role}</p>
+                    </div>
+                    <p className="text-white/80 text-sm leading-relaxed">
+                      "{testimonials[testimonialIndex].content}"
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Navigation */}
+              <div className="flex items-center justify-between mt-4">
+                <div className="flex gap-1.5">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setTestimonialIndex(index)}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        index === testimonialIndex 
+                          ? 'w-6 bg-primary' 
+                          : 'w-1.5 bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to testimonial ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={prevTestimonial}
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                    aria-label="Previous"
+                  >
+                    <ChevronLeft className="h-4 w-4 text-white" />
+                  </button>
+                  <button 
+                    onClick={nextTestimonial}
+                    className="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-primary/90 transition-colors"
+                    aria-label="Next"
+                  >
+                    <ChevronRight className="h-4 w-4 text-white" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
