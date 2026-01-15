@@ -35,7 +35,7 @@ export function Header() {
           <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/30 transition-shadow">
             <GraduationCap className="h-5 w-5 text-white" />
           </div>
-          <span className="text-xl font-bold text-foreground">EduLearn</span>
+          <span className="text-xl font-bold text-foreground">Vidya Shiksha</span>
         </Link>
 
         {/* Desktop Navigation */}
