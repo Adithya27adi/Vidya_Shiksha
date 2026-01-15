@@ -52,34 +52,37 @@ function LearningContent() {
 
   return (
     <div className="min-h-screen flex bg-background">
-      {/* Sidebar */}
-      <aside className="w-80 bg-sidebar border-r border-sidebar-border flex-shrink-0 flex flex-col">
+      {/* Sidebar - Premium Dark */}
+      <aside className="w-80 learning-sidebar flex-shrink-0 flex flex-col">
         {/* Header */}
         <div className="p-5 border-b border-sidebar-border">
           <Link 
             to="/my-courses" 
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-sm text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors mb-4"
           >
             <ChevronLeft className="h-4 w-4" />
             Back to My Courses
           </Link>
-          <h2 className="font-bold text-foreground text-lg truncate">{batch.course?.title}</h2>
-          <p className="text-sm text-muted-foreground mt-1">{batch.title}</p>
+          <h2 className="font-bold text-sidebar-foreground text-lg truncate">{batch.course?.title}</h2>
+          <p className="text-sm text-sidebar-foreground/60 mt-1">{batch.title}</p>
           
           {/* Progress */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-muted-foreground">Progress</span>
-              <span className="font-semibold text-primary">{Math.round(progressPercent)}%</span>
+          <div className="mt-5 p-4 rounded-xl bg-sidebar-accent">
+            <div className="flex items-center justify-between text-sm mb-3">
+              <span className="text-sidebar-foreground/70">Your Progress</span>
+              <span className="font-bold text-sidebar-primary">{Math.round(progressPercent)}%</span>
             </div>
-            <Progress value={progressPercent} className="h-2" />
+            <Progress value={progressPercent} className="h-2 bg-sidebar-border" />
+            <p className="text-xs text-sidebar-foreground/50 mt-2">
+              {completedClasses} of {classes.length} classes completed
+            </p>
           </div>
         </div>
 
         {/* Class list */}
-        <nav className="flex-1 overflow-y-auto py-3">
-          <div className="px-4 mb-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+        <nav className="flex-1 overflow-y-auto py-4">
+          <div className="px-5 mb-3">
+            <span className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider">
               Course Content
             </span>
           </div>
@@ -91,33 +94,33 @@ function LearningContent() {
               <button
                 key={cls.id}
                 onClick={() => setSelectedClassId(cls.id)}
-                className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-all duration-200 border-l-3 ${
+                className={`w-full flex items-start gap-3 px-5 py-4 text-left transition-all duration-200 border-l-3 ${
                   isCurrent 
-                    ? "bg-accent border-l-primary" 
-                    : "border-transparent hover:bg-muted/50"
+                    ? "bg-sidebar-accent border-l-sidebar-primary" 
+                    : "border-transparent hover:bg-sidebar-accent/50"
                 }`}
               >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
                   isCompleted 
-                    ? "bg-live/10" 
+                    ? "bg-live/20" 
                     : isCurrent 
-                    ? "gradient-bg text-white" 
-                    : "bg-muted"
+                    ? "gradient-bg" 
+                    : "bg-sidebar-accent"
                 }`}>
                   {isCompleted ? (
                     <CheckCircle className="h-4 w-4 text-live" />
                   ) : (
-                    <span className={`text-sm font-semibold ${isCurrent ? "" : "text-muted-foreground"}`}>
+                    <span className={`text-sm font-bold ${isCurrent ? "text-white" : "text-sidebar-foreground/60"}`}>
                       {index + 1}
                     </span>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`text-sm truncate ${isCurrent ? "font-semibold text-foreground" : "text-foreground"}`}>
+                  <p className={`text-sm truncate ${isCurrent ? "font-semibold text-sidebar-foreground" : "text-sidebar-foreground/80"}`}>
                     {cls.title}
                   </p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <div className="flex items-center gap-3 mt-1">
+                    <span className="text-xs text-sidebar-foreground/50 flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {cls.duration_minutes} min
                     </span>
@@ -140,12 +143,12 @@ function LearningContent() {
         {currentClass && (
           <>
             {/* Class Header */}
-            <div className="sticky top-0 z-10 glass border-b border-border">
-              <div className="p-5">
+            <div className="sticky top-0 z-10 bg-background border-b border-border">
+              <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-sm font-medium text-primary">
+                      <span className="badge-recorded">
                         Class {currentIndex + 1} of {classes.length}
                       </span>
                       {currentClass.is_live && (
@@ -161,7 +164,7 @@ function LearningContent() {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex gap-2 mt-5">
+                <div className="flex gap-2 mt-6 p-1 bg-muted/50 rounded-xl w-fit">
                   {tabs.map((tab) => (
                     <button
                       key={tab.id}
@@ -196,14 +199,14 @@ function LearningContent() {
                           </div>
                         </div>
                         
-                        <div className="bg-muted/50 rounded-xl p-4 mb-6">
+                        <div className="bg-muted/50 rounded-xl p-5 mb-6">
                           <div className="grid grid-cols-2 gap-4 text-sm">
                             <div>
-                              <span className="text-muted-foreground">Platform</span>
+                              <span className="text-muted-foreground block mb-1">Platform</span>
                               <p className="font-semibold text-foreground capitalize">{currentClass.liveClass.platform}</p>
                             </div>
                             <div>
-                              <span className="text-muted-foreground">Meeting ID</span>
+                              <span className="text-muted-foreground block mb-1">Meeting ID</span>
                               <p className="font-semibold text-foreground">{currentClass.liveClass.meeting_id}</p>
                             </div>
                           </div>
@@ -237,7 +240,7 @@ function LearningContent() {
                           </div>
                           {/* Video number badge */}
                           <div className="absolute top-4 left-4">
-                            <span className="px-3 py-1.5 rounded-full bg-black/50 text-white text-sm font-medium backdrop-blur-sm">
+                            <span className="px-3 py-1.5 rounded-full bg-foreground/80 text-background text-sm font-medium backdrop-blur-sm">
                               Video {index + 1}
                             </span>
                           </div>
@@ -312,7 +315,7 @@ function LearningContent() {
                         rel="noopener noreferrer" 
                         className="feature-card flex items-center gap-4 p-5 group"
                       >
-                        <div className="icon-wrapper-primary group-hover:scale-110">
+                        <div className="icon-wrapper-primary group-hover:scale-110 transition-transform">
                           {item.type === "pdf" ? (
                             <Download className="h-5 w-5 text-primary" />
                           ) : (
@@ -343,7 +346,7 @@ function LearningContent() {
             </div>
 
             {/* Navigation Footer */}
-            <div className="sticky bottom-0 glass border-t border-border p-4">
+            <div className="sticky bottom-0 bg-background border-t border-border p-4">
               <div className="flex items-center justify-between max-w-3xl mx-auto">
                 <button
                   onClick={() => {
@@ -352,7 +355,7 @@ function LearningContent() {
                     }
                   }}
                   disabled={currentIndex === 0}
-                  className="btn-outline py-2.5 px-5 gap-2 disabled:opacity-50"
+                  className="btn-outline py-2.5 px-5 gap-2 disabled:opacity-40"
                 >
                   <ChevronLeft className="h-4 w-4" />
                   Previous
@@ -370,7 +373,7 @@ function LearningContent() {
                     }
                   }}
                   disabled={currentIndex === classes.length - 1}
-                  className="btn-outline py-2.5 px-5 gap-2 disabled:opacity-50"
+                  className="btn-outline py-2.5 px-5 gap-2 disabled:opacity-40"
                 >
                   Next
                   <ArrowRight className="h-4 w-4" />

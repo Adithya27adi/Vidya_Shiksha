@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { GraduationCap, Menu, X } from "lucide-react";
+import { GraduationCap, Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export function Header() {
@@ -28,25 +28,26 @@ export function Header() {
   const links = isAuthenticated ? authLinks : publicLinks;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
-      <div className="container flex h-14 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
-            <GraduationCap className="h-5 w-5 text-primary-foreground" />
+    <header className="sticky top-0 z-50 w-full glass border-b border-border/50">
+      <div className="container flex h-16 items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/30 transition-shadow">
+            <GraduationCap className="h-5 w-5 text-white" />
           </div>
-          <span className="text-lg font-bold text-foreground">EduLearn</span>
+          <span className="text-xl font-bold text-foreground">EduLearn</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-1">
           {links.map((link) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                 location.pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
             >
               {link.label}
@@ -59,7 +60,7 @@ export function Header() {
           {isAuthenticated ? (
             <button 
               onClick={handleLogout} 
-              className="btn-outline text-sm"
+              className="btn-outline text-sm py-2"
             >
               Logout
             </button>
@@ -67,11 +68,11 @@ export function Header() {
             <>
               <Link 
                 to="/login" 
-                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 Login
               </Link>
-              <Link to="/signup" className="btn-primary text-sm">
+              <Link to="/signup" className="btn-primary text-sm py-2">
                 Get Started
               </Link>
             </>
@@ -80,7 +81,7 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -94,23 +95,23 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
-          <nav className="container py-4 flex flex-col gap-2">
+        <div className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl">
+          <nav className="container py-4 flex flex-col gap-1">
             {links.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-medium py-2 ${
+                className={`text-sm font-medium py-3 px-4 rounded-lg transition-colors ${
                   location.pathname === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:bg-muted/50"
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="border-t border-border mt-2 pt-4 flex flex-col gap-2">
+            <div className="border-t border-border/50 mt-3 pt-4 flex flex-col gap-2">
               {isAuthenticated ? (
                 <button
                   onClick={() => {
@@ -125,7 +126,7 @@ export function Header() {
                 <>
                   <Link
                     to="/login"
-                    className="text-sm font-medium text-center py-2 text-muted-foreground"
+                    className="text-sm font-medium text-center py-3 text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Login
