@@ -75,20 +75,6 @@ function MyCoursesContent() {
                           {enrollment.batch.title}
                         </p>
 
-                        {/* Progress Bar */}
-                        <div className="mb-4">
-                          <div className="flex justify-between text-sm mb-1">
-                            <span className="text-muted-foreground">Progress</span>
-                            <span className="text-foreground">{enrollment.progress_percentage}%</span>
-                          </div>
-                          <div className="h-2 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-primary rounded-full"
-                              style={{ width: `${enrollment.progress_percentage}%` }}
-                            />
-                          </div>
-                        </div>
-
                         <Link
                           to={`/learn/${enrollment.batch.id}`}
                           className="btn-primary w-full text-sm"
