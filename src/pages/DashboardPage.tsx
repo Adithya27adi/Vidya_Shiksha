@@ -99,18 +99,6 @@ function DashboardContent() {
                           {enrollment.batch.title}
                         </p>
 
-                        {/* Progress */}
-                        <div className="flex items-center gap-3">
-                          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-primary rounded-full"
-                              style={{ width: `${enrollment.progress_percentage}%` }}
-                            />
-                          </div>
-                          <span className="text-xs text-muted-foreground">
-                            {enrollment.progress_percentage}%
-                          </span>
-                        </div>
                       </div>
                       <Link
                         to={`/learn/${enrollment.batch.id}`}
@@ -132,26 +120,6 @@ function DashboardContent() {
               )}
             </section>
 
-            {/* Quick Stats */}
-            <section className="grid grid-cols-3 gap-4">
-              <div className="bg-card border border-border rounded-lg p-5 text-center">
-                <p className="text-3xl font-bold text-primary mb-1">{enrollments.length}</p>
-                <p className="text-sm text-muted-foreground">Enrolled Courses</p>
-              </div>
-              <div className="bg-card border border-border rounded-lg p-5 text-center">
-                <p className="text-3xl font-bold text-primary mb-1">
-                  {Math.round(
-                    enrollments.reduce((acc, e) => acc + e.progress_percentage, 0) /
-                      (enrollments.length || 1)
-                  )}%
-                </p>
-                <p className="text-sm text-muted-foreground">Avg. Progress</p>
-              </div>
-              <div className="bg-card border border-border rounded-lg p-5 text-center">
-                <p className="text-3xl font-bold text-primary mb-1">{upcomingClasses.length}</p>
-                <p className="text-sm text-muted-foreground">Upcoming Classes</p>
-              </div>
-            </section>
           </div>
 
           {/* Sidebar */}
