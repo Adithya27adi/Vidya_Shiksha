@@ -1,8 +1,18 @@
+import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { useAuth } from "@/contexts/AuthContext";
 import { getOrdersWithDetails } from "@/data/mockData";
 import { User, MapPin, Phone, Mail, GraduationCap, CreditCard, CheckCircle } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 export default function ProfilePage() {
   return (
@@ -15,6 +25,14 @@ export default function ProfilePage() {
 function ProfileContent() {
   const { user } = useAuth();
   const orders = getOrdersWithDetails("user-1");
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: user?.first_name || "",
+    lastName: user?.last_name || "",
+    phone: user?.phone || "",
+    location: user?.location || "",
+    grade: user?.grade || "",
+  });
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("en-IN", {
@@ -22,6 +40,12 @@ function ProfileContent() {
       month: "long",
       year: "numeric",
     });
+  };
+
+  const handleSave = () => {
+    // In a real app, this would update the user profile
+    console.log("Saving profile:", formData);
+    setIsEditOpen(false);
   };
 
   return (
@@ -72,9 +96,13 @@ function ProfileContent() {
                 </div>
               </div>
 
-              <button className="btn-outline w-full mt-6 text-sm">
+              <Button 
+                variant="outline" 
+                className="w-full mt-6"
+                onClick={() => setIsEditOpen(true)}
+              >
                 Edit Profile
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -135,32 +163,70 @@ function ProfileContent() {
                 </div>
               )}
             </div>
-
-            {/* Account Summary */}
-            <div className="bg-card border border-border rounded-lg p-6 mt-6">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Account Summary</h3>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-surface-subtle rounded-lg">
-                  <p className="text-2xl font-bold text-primary">{orders.length}</p>
-                  <p className="text-sm text-muted-foreground">Total Orders</p>
-                </div>
-                <div className="text-center p-4 bg-surface-subtle rounded-lg">
-                  <p className="text-2xl font-bold text-primary">
-                    ₹{orders.reduce((sum, o) => sum + o.amount, 0).toLocaleString()}
-                  </p>
-                  <p className="text-sm text-muted-foreground">Total Spent</p>
-                </div>
-                <div className="text-center p-4 bg-surface-subtle rounded-lg">
-                  <p className="text-2xl font-bold text-primary">
-                    {formatDate(user?.created_at || new Date().toISOString()).split(" ")[1]}
-                  </p>
-                  <p className="text-sm text-muted-foreground">Member Since</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Edit Profile Dialog */}
+      <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="location">Location</Label>
+              <Input
+                id="location"
+                value={formData.location}
+                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="grade">Class/Grade</Label>
+              <Input
+                id="grade"
+                value={formData.grade}
+                onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
+              />
+            </div>
+          </div>
+          <div className="flex justify-end gap-3">
+            <Button variant="outline" onClick={() => setIsEditOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleSave}>
+              Save Changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </MainLayout>
   );
 }
