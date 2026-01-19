@@ -46,8 +46,8 @@ export const instructors: Instructor[] = [
   },
 ];
 
-// Courses
-export const courses: Course[] = [
+// Courses - make it mutable for admin to add/edit
+export let courses: Course[] = [
   {
     id: "course-1",
     title: "Mathematics Foundation",
@@ -146,8 +146,8 @@ export const courses: Course[] = [
   },
 ];
 
-// Batches with instructor assignment and pricing
-export const batches: Batch[] = [
+// Batches with instructor assignment and pricing - make mutable
+export let batches: Batch[] = [
   // Course 1 - Mathematics Foundation
   {
     id: "batch-1a",
@@ -572,23 +572,80 @@ export const questions: Question[] = [
   },
 ];
 
-// Mock enrolled user data
-export const mockStudentProfile: StudentProfile = {
-  id: "student-1",
-  user_id: "user-1",
-  first_name: "Arjun",
-  last_name: "Patel",
-  age: 14,
-  grade: 8,
-  location: "Mumbai, Maharashtra",
-  phone: "+91 98765 43210",
-  avatar_url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop",
-  created_at: "2024-06-01T00:00:00Z",
-  updated_at: "2024-12-01T00:00:00Z",
-};
+// Mock students list for admin
+export const mockStudents: StudentProfile[] = [
+  {
+    id: "student-1",
+    user_id: "user-1",
+    first_name: "Arjun",
+    last_name: "Patel",
+    age: 14,
+    grade: 8,
+    location: "Mumbai, Maharashtra",
+    phone: "+91 98765 43210",
+    avatar_url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop",
+    created_at: "2024-06-01T00:00:00Z",
+    updated_at: "2024-12-01T00:00:00Z",
+  },
+  {
+    id: "student-2",
+    user_id: "user-2",
+    first_name: "Priya",
+    last_name: "Singh",
+    age: 13,
+    grade: 7,
+    location: "Delhi, India",
+    phone: "+91 98765 43211",
+    avatar_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+    created_at: "2024-07-15T00:00:00Z",
+    updated_at: "2024-12-01T00:00:00Z",
+  },
+  {
+    id: "student-3",
+    user_id: "user-3",
+    first_name: "Rahul",
+    last_name: "Sharma",
+    age: 15,
+    grade: 9,
+    location: "Bangalore, Karnataka",
+    phone: "+91 98765 43212",
+    avatar_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+    created_at: "2024-08-20T00:00:00Z",
+    updated_at: "2024-12-01T00:00:00Z",
+  },
+  {
+    id: "student-4",
+    user_id: "user-4",
+    first_name: "Ananya",
+    last_name: "Gupta",
+    age: 12,
+    grade: 6,
+    location: "Chennai, Tamil Nadu",
+    phone: "+91 98765 43213",
+    avatar_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop",
+    created_at: "2024-09-10T00:00:00Z",
+    updated_at: "2024-12-01T00:00:00Z",
+  },
+  {
+    id: "student-5",
+    user_id: "user-5",
+    first_name: "Vikram",
+    last_name: "Reddy",
+    age: 16,
+    grade: 10,
+    location: "Hyderabad, Telangana",
+    phone: "+91 98765 43214",
+    avatar_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop",
+    created_at: "2024-10-05T00:00:00Z",
+    updated_at: "2024-12-01T00:00:00Z",
+  },
+];
 
-// Mock enrollments
-export const mockEnrollments: Enrollment[] = [
+// Mock enrolled user data
+export const mockStudentProfile: StudentProfile = mockStudents[0];
+
+// Mock enrollments - make mutable
+export let mockEnrollments: Enrollment[] = [
   {
     id: "enroll-1",
     user_id: "user-1",
@@ -609,10 +666,30 @@ export const mockEnrollments: Enrollment[] = [
     created_at: "2024-12-25T00:00:00Z",
     updated_at: "2025-01-08T00:00:00Z",
   },
+  {
+    id: "enroll-3",
+    user_id: "user-2",
+    batch_id: "batch-1a",
+    enrolled_at: "2024-12-22T00:00:00Z",
+    status: "active",
+    progress_percentage: 25,
+    created_at: "2024-12-22T00:00:00Z",
+    updated_at: "2025-01-05T00:00:00Z",
+  },
+  {
+    id: "enroll-4",
+    user_id: "user-3",
+    batch_id: "batch-3a",
+    enrolled_at: "2024-12-28T00:00:00Z",
+    status: "active",
+    progress_percentage: 10,
+    created_at: "2024-12-28T00:00:00Z",
+    updated_at: "2025-01-12T00:00:00Z",
+  },
 ];
 
-// Mock orders
-export const mockOrders: Order[] = [
+// Mock orders - make mutable
+export let mockOrders: Order[] = [
   {
     id: "order-1",
     user_id: "user-1",
@@ -633,10 +710,30 @@ export const mockOrders: Order[] = [
     created_at: "2024-12-25T00:00:00Z",
     updated_at: "2024-12-25T00:00:00Z",
   },
+  {
+    id: "order-3",
+    user_id: "user-2",
+    batch_id: "batch-1a",
+    amount: 4999,
+    currency: "INR",
+    status: "confirmed",
+    created_at: "2024-12-22T00:00:00Z",
+    updated_at: "2024-12-22T00:00:00Z",
+  },
+  {
+    id: "order-4",
+    user_id: "user-3",
+    batch_id: "batch-3a",
+    amount: 4499,
+    currency: "INR",
+    status: "confirmed",
+    created_at: "2024-12-28T00:00:00Z",
+    updated_at: "2024-12-28T00:00:00Z",
+  },
 ];
 
-// Mock payments
-export const mockPayments: Payment[] = [
+// Mock payments - make mutable
+export let mockPayments: Payment[] = [
   {
     id: "payment-1",
     order_id: "order-1",
@@ -658,6 +755,28 @@ export const mockPayments: Payment[] = [
     transaction_id: "TXN987654321",
     paid_at: "2024-12-25T00:03:00Z",
     created_at: "2024-12-25T00:00:00Z",
+  },
+  {
+    id: "payment-3",
+    order_id: "order-3",
+    amount: 4999,
+    currency: "INR",
+    method: "upi",
+    status: "completed",
+    transaction_id: "TXN456789123",
+    paid_at: "2024-12-22T00:02:00Z",
+    created_at: "2024-12-22T00:00:00Z",
+  },
+  {
+    id: "payment-4",
+    order_id: "order-4",
+    amount: 4499,
+    currency: "INR",
+    method: "netbanking",
+    status: "completed",
+    transaction_id: "TXN789123456",
+    paid_at: "2024-12-28T00:04:00Z",
+    created_at: "2024-12-28T00:00:00Z",
   },
 ];
 
@@ -722,6 +841,20 @@ export function getEnrollmentsWithDetails(userId: string): EnrollmentWithDetails
     });
 }
 
+export function getAllEnrollmentsWithDetails(): EnrollmentWithDetails[] {
+  return mockEnrollments.map((enrollment) => {
+    const batch = getBatchWithDetails(enrollment.batch_id)!;
+    const course = courses.find((c) => c.id === batch.course_id)!;
+    const student = mockStudents.find((s) => s.user_id === enrollment.user_id);
+    return {
+      ...enrollment,
+      batch,
+      course,
+      student,
+    };
+  });
+}
+
 export function getOrdersWithDetails(userId: string): OrderWithDetails[] {
   return mockOrders
     .filter((o) => o.user_id === userId)
@@ -736,6 +869,22 @@ export function getOrdersWithDetails(userId: string): OrderWithDetails[] {
         payment,
       };
     });
+}
+
+export function getAllOrdersWithDetails(): OrderWithDetails[] {
+  return mockOrders.map((order) => {
+    const batch = getBatchWithDetails(order.batch_id)!;
+    const course = courses.find((c) => c.id === batch.course_id)!;
+    const payment = mockPayments.find((p) => p.order_id === order.id);
+    const student = mockStudents.find((s) => s.user_id === order.user_id);
+    return {
+      ...order,
+      batch,
+      course,
+      payment,
+      student,
+    };
+  });
 }
 
 export function getReadingComprehension(activityId: string): ReadingComprehension | undefined {
@@ -766,4 +915,87 @@ export function getSubjects(): string[] {
 
 export function getClassLevels(): number[] {
   return [...new Set(courses.map((c) => c.class_level))].sort((a, b) => a - b);
+}
+
+export function getAllStudents(): StudentProfile[] {
+  return mockStudents;
+}
+
+export function getBatchEnrollmentCount(batchId: string): number {
+  return mockEnrollments.filter((e) => e.batch_id === batchId).length;
+}
+
+// Admin functions
+export function addCourse(course: Course): void {
+  courses = [...courses, course];
+}
+
+export function updateCourse(courseId: string, updates: Partial<Course>): void {
+  courses = courses.map((c) => (c.id === courseId ? { ...c, ...updates, updated_at: new Date().toISOString() } : c));
+}
+
+export function deleteCourse(courseId: string): void {
+  courses = courses.filter((c) => c.id !== courseId);
+  batches = batches.filter((b) => b.course_id !== courseId);
+}
+
+export function addBatch(batch: Batch): void {
+  batches = [...batches, batch];
+}
+
+export function updateBatch(batchId: string, updates: Partial<Batch>): void {
+  batches = batches.map((b) => (b.id === batchId ? { ...b, ...updates, updated_at: new Date().toISOString() } : b));
+}
+
+export function deleteBatch(batchId: string): void {
+  batches = batches.filter((b) => b.id !== batchId);
+}
+
+export function enrollStudent(userId: string, batchId: string): void {
+  const enrollmentId = `enroll-${Date.now()}`;
+  const orderId = `order-${Date.now()}`;
+  const paymentId = `payment-${Date.now()}`;
+  const batch = batches.find((b) => b.id === batchId);
+  
+  if (!batch) return;
+
+  // Create order
+  const newOrder: Order = {
+    id: orderId,
+    user_id: userId,
+    batch_id: batchId,
+    amount: batch.price,
+    currency: batch.currency,
+    status: "confirmed",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+  mockOrders = [...mockOrders, newOrder];
+
+  // Create payment
+  const newPayment: Payment = {
+    id: paymentId,
+    order_id: orderId,
+    amount: batch.price,
+    currency: batch.currency,
+    method: "upi",
+    status: "completed",
+    transaction_id: `ADMIN-TXN-${Date.now()}`,
+    paid_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+  };
+  mockPayments = [...mockPayments, newPayment];
+
+  // Create enrollment
+  const newEnrollment: Enrollment = {
+    id: enrollmentId,
+    user_id: userId,
+    batch_id: batchId,
+    enrolled_at: new Date().toISOString(),
+    status: "active",
+    progress_percentage: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+  mockEnrollments = [...mockEnrollments, newEnrollment];
 }
