@@ -21,6 +21,12 @@ import ReadingComprehensionPage from "./pages/ReadingComprehensionPage";
 import AssessmentPage from "./pages/AssessmentPage";
 import NotFound from "./pages/NotFound";
 
+// Admin Pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminCoursesPage from "./pages/admin/AdminCoursesPage";
+import AdminEnrollmentsPage from "./pages/admin/AdminEnrollmentsPage";
+import AdminEnrollStudentPage from "./pages/admin/AdminEnrollStudentPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -48,6 +54,12 @@ const App = () => (
             <Route path="/learn/:batchId" element={<LearningPage />} />
             <Route path="/reading/:activityId" element={<ReadingComprehensionPage />} />
             <Route path="/assessment/:activityId" element={<AssessmentPage />} />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/courses" element={<AdminCoursesPage />} />
+            <Route path="/admin/enrollments" element={<AdminEnrollmentsPage />} />
+            <Route path="/admin/enroll-student" element={<AdminEnrollStudentPage />} />
             
             <Route path="*" element={<NotFound />} />
           </Routes>

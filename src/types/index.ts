@@ -4,6 +4,7 @@ export interface User {
   id: string;
   email: string;
   password_hash?: string;
+  role: "student" | "admin";
   created_at: string;
   updated_at: string;
 }
@@ -213,10 +214,12 @@ export interface ClassWithContent extends Class {
 export interface EnrollmentWithDetails extends Enrollment {
   batch: BatchWithInstructor;
   course: Course;
+  student?: StudentProfile;
 }
 
 export interface OrderWithDetails extends Order {
   batch: BatchWithInstructor;
   course: Course;
   payment?: Payment;
+  student?: StudentProfile;
 }
